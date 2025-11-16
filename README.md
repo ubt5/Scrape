@@ -2,5 +2,5 @@
 Roblox Dumping Utility
 
 ```lua
-loadstring(game:HttpGet("https://github.com/nullcrisis/Scrape/raw/refs/heads/main/Dump.lua"))()
+loadstring(game:HttpGet("https://github.com/ubt5/Scrape/raw/refs/heads/main/Dump.lua"))()
 ```
