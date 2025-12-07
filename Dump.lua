@@ -97,7 +97,10 @@ function Dump:Script(script, category)
             makefolder(FolderPath)
         end
 
-        writefile(Filename, Result.Output)
+        local ScriptPath = "-- Script Path: " .. script:GetFullName() .. "\n"
+        local FileContent = ScriptPath .. Result.Output
+
+        writefile(Filename, FileContent)
     else
         Fail += 1
     end
