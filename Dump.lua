@@ -83,12 +83,21 @@ function Dump:Decompile(script)
 end
 
 function Dump:Script(script, category)
-    local result = self:Decompile(script)
-
-    if result.Success and result.Output ~= "Unknown Bytecode" then
+    local Result = self:Decompile(script)
+    if Result.Success and Result.Output ~= "Unknown Bytecode" then
         Success += 1
-        local name = script.Name .. tostring(Success)
-        writefile(Path .. "/" .. category .. "/" .. name .. ".lua", result.Output)
+
+        local Relative = script:GetFullName():gsub(category .. ".", "")
+        local RelativePath = Relative:gsub("%.", "/")
+
+        local Filename = Path .. "/" .. category .. "/" .. RelativePath .. ".lua"
+
+        local FolderPath = Filename:match("(.+)/[^/]+%.lua$")
+        if not isfolder(FolderPath) then
+            makefolder(FolderPath)
+        end
+
+        writefile(Filename, Result.Output)
     else
         Fail += 1
     end
